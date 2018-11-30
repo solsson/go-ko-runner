@@ -6,11 +6,14 @@ RUN curl https://raw.githubusercontent.com/golang/dep/f0d88bbe4c99d3bf4a81ad42f2
 
 RUN go get github.com/google/go-containerregistry/cmd/ko
 
-RUN mkdir /root/.docker && echo '{}' > /root/.docker/config.json
+COPY apply.sh /usr/local/bin/apply
+ENTRYPOINT ["/usr/local/bin/apply"]
 
-RUN chown -R nobody:nogroup ${GOPATH}
+RUN mkdir -p /nonexistent/.docker && chown -R nobody:nogroup ${GOPATH} /nonexistent
 USER nobody
+RUN echo '{}' > /nonexistent/.docker/config.json
 
-# The default value here is meant as an example only
+# Default values here are meant as examples, with https://github.com/triggermesh/knative-local-registry
+ENV KO_DOCKER_REPO=knative.registry.svc.cluster.local/go-ko-runner
 ENV KO_SOURCE=github.com/knative/build-pipeline
-ENV KO_DOCKER_REPO=knative.registry.svc.cluster.local/devpod1
+ENV KO_REVISION=master
