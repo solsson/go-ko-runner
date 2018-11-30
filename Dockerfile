@@ -8,7 +8,9 @@ RUN go get github.com/google/go-containerregistry/cmd/ko
 
 RUN mkdir /root/.docker && echo '{}' > /root/.docker/config.json
 
+RUN chown -R nobody:nogroup ${GOPATH}
 USER nobody
 
 # The default value here is meant as an example only
 ENV KO_SOURCE=github.com/knative/build-pipeline
+ENV KO_DOCKER_REPO=knative.registry.svc.cluster.local/devpod1
