@@ -7,12 +7,22 @@ This docker image automates the process of [ko](https://github.com/google/go-con
 
 ## Example run
 
+This example assumes that you have https://github.com/triggermesh/knative-local-registry in your cluster,
+which is why there's no authentication setup for Docker push.
+
 ```
-runner=solsson/go-ko-runner@sha256:31b647c6ce06a02cf9a2aa6f1277f911fc0f1f78dca7cbd83dd7564cfcbc8ee9
+runner=solsson/go-ko-runner@sha256:3967f69d7bf0c512c3bad65538bf66b661ceab9a5d37c1b1f2dd8cafe944142a
 kubectl create serviceaccount ko-runner --namespace=default
 kubectl create clusterrolebinding ko-runner --clusterrole=cluster-admin --serviceaccount=default:ko-runner --namespace=default
 kubectl run install-knative-build-pipeline --serviceaccount=ko-runner \
   --restart=Never --image=$runner \
   --env="KO_SOURCE=github.com/knative/build-pipeline" --env="KO_REVISION=master" \
   --env="EXIT_DELAY=infinity"
+```
+
+The exit delay is there because you might want to `kubectl exec -ti install-knative-build-pipeline` and do stuff 🙂. After installation you'll probably want to:
+
+```
+kubectl create clusterrolebinding ko-runner
+kubectl create serviceaccount ko-runner
 ```
