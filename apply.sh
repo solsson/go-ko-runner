@@ -23,3 +23,7 @@ if [ -d ./third_party ]; then
     kubectl apply -R -f ./third_party
   fi
 fi
+
+# You sometimes want to exec into the pod to do stuff
+echo "Sleeping for $EXIT_DELAY seconds before exit"
+sleep $EXIT_DELAY

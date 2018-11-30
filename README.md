@@ -13,9 +13,6 @@ kubectl create serviceaccount ko-runner --namespace=default
 kubectl create clusterrolebinding ko-runner --clusterrole=cluster-admin --serviceaccount=default:ko-runner --namespace=default
 kubectl run install-knative-build-pipeline --serviceaccount=ko-runner \
   --restart=Never --image=$runner \
-  --env="KO_SOURCE"=github.com/knative/build-pipeline --env="KO_REVISION=master"
-  # -t -i --command bash
+  --env="KO_SOURCE=github.com/knative/build-pipeline" --env="KO_REVISION=master" \
+  --env="EXIT_DELAY=infinity"
 ```
-
-
-
