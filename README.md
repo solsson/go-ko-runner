@@ -11,7 +11,7 @@ This example assumes that you have https://github.com/triggermesh/knative-local-
 which is why there's no authentication setup for Docker push.
 
 ```
-runner=solsson/go-ko-runner@sha256:3967f69d7bf0c512c3bad65538bf66b661ceab9a5d37c1b1f2dd8cafe944142a
+runner=solsson/go-ko-runner@sha256:a1c2b790e59c7c482879181339fef03ca3486cf133691642b5feff482155f9e0
 kubectl create serviceaccount ko-runner --namespace=default
 kubectl create clusterrolebinding ko-runner --clusterrole=cluster-admin --serviceaccount=default:ko-runner --namespace=default
 kubectl run install-knative-build-pipeline --serviceaccount=ko-runner \
