@@ -24,7 +24,7 @@ git clone https://${KO_SOURCE} ${GOPATH}/src/${KO_SOURCE}
 
 cd ${GOPATH}/src/${KO_SOURCE}
 
-git checkout origin/${KO_REVISION}
+git checkout ${KO_REVISION}
 
 echo "Running ko with registry ${KO_DOCKER_REPO}"
 ko apply -f config/
