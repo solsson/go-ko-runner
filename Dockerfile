@@ -31,6 +31,7 @@ RUN echo '{}' > /nonexistent/.docker/config.json
 ENV KO_DOCKER_REPO=knative.registry.svc.cluster.local/go-ko-runner
 ENV KO_SOURCE=github.com/knative/build-pipeline
 ENV KO_REVISION=master
+ENV KO_APPLY_PATH=config/
 
 # Seconds, "infinity" for never
 ENV EXIT_DELAY=1

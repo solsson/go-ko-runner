@@ -27,7 +27,7 @@ cd ${GOPATH}/src/${KO_SOURCE}
 git checkout ${KO_REVISION}
 
 echo "Running ko with registry ${KO_DOCKER_REPO}"
-ko apply -f config/
+ko apply -f ${KO_APPLY_PATH}
 
 # You'll often want to ko apply dependencies too, or install from release, but here's some help in case not
 if [ -d ./third_party ]; then
