@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM golang:1.11.2-stretch@sha256:498f71698c1bcbf50d6e5f08ce60c30ccab3ab5b6775c4b5395b1ae1a367bdab
+FROM golang:1.12.6-stretch@sha256:00687f5beb8b17b8af7a756943fb1658832615d714c1760562f5ae40492e1107
 
-RUN curl -SLs https://dl.k8s.io/v1.12.3/kubernetes-client-linux-amd64.tar.gz | tar xzf - --strip-components=3 -C /usr/local/bin/
+RUN curl -SLs https://dl.k8s.io/v1.14.3/kubernetes-client-linux-amd64.tar.gz | tar xzf - --strip-components=3 -C /usr/local/bin/
 
-RUN curl https://raw.githubusercontent.com/golang/dep/f0d88bbe4c99d3bf4a81ad42f27d09b3fd0b7e59/install.sh | sh
+RUN curl https://raw.githubusercontent.com/golang/dep/1f7c19e5f52f49ffb9f956f64c010be14683468b/install.sh | sh
 
-RUN go get github.com/google/go-containerregistry/cmd/ko
+RUN go get github.com/google/ko/cmd/ko
 
 COPY apply.sh /usr/local/bin/apply
 ENTRYPOINT ["/usr/local/bin/apply"]
