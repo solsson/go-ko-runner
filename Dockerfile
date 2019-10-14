@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM golang:1.12.6-stretch@sha256:00687f5beb8b17b8af7a756943fb1658832615d714c1760562f5ae40492e1107
+FROM golang:1.13.1-stretch@sha256:86f0859c5aa16bf6e168eeaa7ec7b99eb8b91e46f14eccf02fd1bcdf6fc51ea3
 
-RUN curl -SLs https://dl.k8s.io/v1.14.3/kubernetes-client-linux-amd64.tar.gz | tar xzf - --strip-components=3 -C /usr/local/bin/
+RUN curl -SLs https://dl.k8s.io/v1.14.7/kubernetes-client-linux-amd64.tar.gz | tar xzf - --strip-components=3 -C /usr/local/bin/
 
 RUN curl https://raw.githubusercontent.com/golang/dep/1f7c19e5f52f49ffb9f956f64c010be14683468b/install.sh | sh
 
@@ -28,8 +28,8 @@ USER nobody
 RUN echo '{}' > /nonexistent/.docker/config.json
 
 # Default values here are meant as examples, with https://github.com/triggermesh/knative-local-registry
-ENV KO_DOCKER_REPO=knative.registry.svc.cluster.local/go-ko-runner
-ENV KO_SOURCE=github.com/knative/build-pipeline
+ENV KO_DOCKER_REPO=builds-registry.ystack.svc.cluster.local/go-ko-runner
+ENV KO_SOURCE=github.com/knative/serving
 ENV KO_REVISION=master
 ENV KO_APPLY_PATH=config/
 
